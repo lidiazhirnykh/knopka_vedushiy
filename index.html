@@ -6,7 +6,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  
   body {
     font-family: 'Montserrat', sans-serif;
     background: linear-gradient(135deg, #0a0e1a 0%, #1a2332 100%);
@@ -14,30 +13,17 @@
     padding: 30px;
     color: #c0c8d0;
   }
-  
-  .header {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
+  .header { text-align: center; margin-bottom: 30px; }
   .title {
     font-family: 'Oswald', sans-serif;
     font-size: 42px;
     background: linear-gradient(180deg, #ffd700 0%, #b8941f 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
     letter-spacing: 4px;
     text-transform: uppercase;
   }
-  
-  .subtitle {
-    color: #8a95a3;
-    font-size: 14px;
-    letter-spacing: 2px;
-    margin-top: 8px;
-  }
-  
+  .subtitle { color: #8a95a3; font-size: 14px; letter-spacing: 2px; margin-top: 8px; }
   .controls {
     display: flex;
     gap: 15px;
@@ -45,7 +31,6 @@
     margin-bottom: 30px;
     flex-wrap: wrap;
   }
-  
   .ctrl-btn {
     padding: 14px 30px;
     font-family: 'Oswald', sans-serif;
@@ -55,32 +40,22 @@
     border-radius: 6px;
     cursor: pointer;
     border: 2px solid;
-    transition: all 0.3s;
   }
-  
   .ctrl-btn.start {
     background: linear-gradient(135deg, #52b788 0%, #40916c 100%);
     border-color: #52b788;
     color: #fff;
   }
-  
   .ctrl-btn.stop {
     background: linear-gradient(135deg, #e63946 0%, #c1121f 100%);
     border-color: #e63946;
     color: #fff;
   }
-  
   .ctrl-btn.reset {
     background: transparent;
     border-color: #4a9eff;
     color: #6eb5ff;
   }
-  
-  .ctrl-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-  }
-  
   .status-bar {
     text-align: center;
     padding: 15px;
@@ -91,22 +66,10 @@
     font-size: 18px;
     letter-spacing: 2px;
   }
-  
-  .status-bar.active {
-    border-left: 4px solid #52b788;
-    color: #52b788;
-  }
-  
-  .status-bar.inactive {
-    border-left: 4px solid #e63946;
-    color: #e63946;
-  }
-  
-  .players-list {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-  
+  .status-bar.active { border-left: 4px solid #52b788; color: #52b788; }
+  .status-bar.inactive { border-left: 4px solid #e63946; color: #e63946; }
+  .status-bar.loading { border-left: 4px solid #4a9eff; color: #6eb5ff; }
+  .players-list { max-width: 700px; margin: 0 auto; }
   .player-row {
     display: grid;
     grid-template-columns: 80px 1fr 150px;
@@ -116,69 +79,43 @@
     border: 1px solid #4a5568;
     border-radius: 8px;
     margin-bottom: 10px;
-    transition: all 0.5s;
-    animation: slideIn 0.5s ease;
   }
-  
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateX(-30px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  
   .player-row.first {
     background: linear-gradient(90deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.05));
     border-color: #ffd700;
     box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
   }
-  
   .player-row.second {
     background: linear-gradient(90deg, rgba(192, 192, 192, 0.15), rgba(192, 192, 192, 0.03));
     border-color: #c0c0c0;
   }
-  
   .player-row.third {
     background: linear-gradient(90deg, rgba(205, 127, 50, 0.15), rgba(205, 127, 50, 0.03));
     border-color: #cd7f32;
   }
-  
   .position {
     font-family: 'Oswald', sans-serif;
     font-size: 36px;
     font-weight: 700;
     color: #8a95a3;
   }
-  
   .player-row.first .position { color: #ffd700; }
   .player-row.second .position { color: #c0c0c0; }
   .player-row.third .position { color: #cd7f32; }
-  
-  .player-name {
-    font-size: 20px;
-    color: #c0c8d0;
-    font-weight: 500;
-  }
-  
-  .player-row.first .player-name {
-    color: #ffd700;
-    font-size: 22px;
-    font-weight: 600;
-  }
-  
+  .player-name { font-size: 20px; color: #c0c8d0; font-weight: 500; }
+  .player-row.first .player-name { color: #ffd700; font-size: 22px; font-weight: 600; }
   .player-time {
     text-align: right;
     font-family: 'Oswald', sans-serif;
     font-size: 14px;
     color: #6a7585;
-    letter-spacing: 1px;
   }
-  
   .empty-state {
     text-align: center;
     padding: 60px 20px;
     color: #6a7585;
     font-size: 18px;
   }
-  
   .counter {
     font-family: 'Oswald', sans-serif;
     font-size: 24px;
@@ -191,7 +128,7 @@
 
 <div class="header">
   <h1 class="title">⭐ Панель ведущего</h1>
-  <p class="subtitle">Раунд ЭКСТРА — порядок нажатий в реальном времени</p>
+  <p class="subtitle">Раунд ЭКСТРА — порядок нажатий</p>
 </div>
 
 <div class="controls">
@@ -200,8 +137,8 @@
   <button class="ctrl-btn reset" onclick="resetRound()">🔄 Сбросить</button>
 </div>
 
-<div class="status-bar" id="statusBar">
-  Статус: <span id="statusText">загрузка...</span>
+<div class="status-bar loading" id="statusBar">
+  Статус: <span id="statusText">подключение...</span>
   <span class="counter" id="counter"></span>
 </div>
 
@@ -210,26 +147,29 @@
 </div>
 
 <script>
-// ============ ВАШИ ДАННЫЕ ============
 const BIN_ID = '6a36ad5ef5f4af5e2914a4d3';
-const MASTER_KEY = '$2a$10$gRNT44Y00gMu6UD.V/S1m.jlLCvfoASF103zBbJoStP4Cpc20B4ju';
+const MASTER_KEY = '$2a$10$6R2dE.M6lkeTUg2STMamfeoNXfb8RNdGXEUVV0eEm9Drin2Nd97.2';
 const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
 let lastPlayersCount = 0;
 
-// Загрузка данных каждые 500 мс для быстрого обновления
-setInterval(loadData, 500);
 loadData();
+setInterval(loadData, 800);
 
 async function loadData() {
   try {
     const response = await fetch(`${API_URL}/latest`, {
       headers: { 'X-Master-Key': MASTER_KEY }
     });
+    
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
     const data = await response.json();
     const bin = data.record;
     
-    // Обновляем статус
+    if (!Array.isArray(bin.players)) bin.players = [];
+    if (typeof bin.active !== 'boolean') bin.active = true;
+    
     const statusBar = document.getElementById('statusBar');
     const statusText = document.getElementById('statusText');
     const counter = document.getElementById('counter');
@@ -243,17 +183,21 @@ async function loadData() {
     }
     
     counter.textContent = `Нажали: ${bin.players.length}`;
-    
-    // Обновляем список игроков
     renderPlayers(bin.players);
     
   } catch (e) {
-    console.error('Ошибка загрузки:', e);
+    const statusBar = document.getElementById('statusBar');
+    const statusText = document.getElementById('statusText');
+    if (statusBar && statusText) {
+      statusBar.className = 'status-bar inactive';
+      statusText.textContent = '⚠️ Ошибка подключения';
+    }
   }
 }
 
 function renderPlayers(players) {
   const list = document.getElementById('playersList');
+  if (!list) return;
   
   if (players.length === 0) {
     list.innerHTML = '<div class="empty-state">Ожидание нажатий...</div>';
@@ -261,13 +205,8 @@ function renderPlayers(players) {
     return;
   }
   
-  // Сортируем по времени нажатия
   const sorted = [...players].sort((a, b) => a.time - b.time);
   
-  // Обновляем позиции
-  sorted.forEach((p, i) => p.position = i + 1);
-  
-  // Рендерим только если изменилось количество
   if (sorted.length !== lastPlayersCount) {
     list.innerHTML = sorted.map((p, i) => {
       let rowClass = '';
@@ -277,14 +216,12 @@ function renderPlayers(players) {
       
       const time = new Date(p.time);
       const timeStr = time.toLocaleTimeString('ru-RU', { 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        second: '2-digit'
+        hour: '2-digit', minute: '2-digit', second: '2-digit'
       });
       
       return `
         <div class="player-row ${rowClass}">
-          <div class="position">#${p.position}</div>
+          <div class="position">#${i + 1}</div>
           <div class="player-name">${i === 0 ? '🏆 ' : ''}${p.name}</div>
           <div class="player-time">${timeStr}</div>
         </div>
@@ -292,9 +229,6 @@ function renderPlayers(players) {
     }).join('');
     
     lastPlayersCount = sorted.length;
-    
-    // Звуковой сигнал при новом игроке
-    if (sorted.length > 0) playBeep();
   }
 }
 
@@ -307,6 +241,7 @@ async function setActive(active) {
     const bin = data.record;
     
     bin.active = active;
+    if (!Array.isArray(bin.players)) bin.players = [];
     
     await fetch(API_URL, {
       method: 'PUT',
@@ -344,22 +279,6 @@ async function resetRound() {
   } catch (e) {
     alert('Ошибка: ' + e.message);
   }
-}
-
-// Звуковой сигнал при новом нажатии
-function playBeep() {
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.frequency.value = 880;
-    gain.gain.setValueAtTime(0.1, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.1);
-  } catch (e) {}
 }
 </script>
 
