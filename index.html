@@ -3,43 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <title>Панель ведущего — ЭКСТРА</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Montserrat', sans-serif;
     background: linear-gradient(135deg, #0a0e1a 0%, #1a2332 100%);
     min-height: 100vh;
-    padding: 30px;
+    padding: 20px;
     color: #c0c8d0;
   }
-  .header { text-align: center; margin-bottom: 30px; }
+  .header { text-align: center; margin-bottom: 20px; }
   .title {
     font-family: 'Oswald', sans-serif;
-    font-size: 42px;
+    font-size: 28px;
     background: linear-gradient(180deg, #ffd700 0%, #b8941f 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     text-transform: uppercase;
   }
-  .subtitle { color: #8a95a3; font-size: 14px; letter-spacing: 2px; margin-top: 8px; }
+  .subtitle {
+    color: #8a95a3;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-top: 5px;
+  }
   .controls {
     display: flex;
-    gap: 15px;
+    gap: 10px;
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
   }
   .ctrl-btn {
-    padding: 14px 30px;
+    padding: 10px 20px;
     font-family: 'Oswald', sans-serif;
-    font-size: 16px;
-    letter-spacing: 2px;
+    font-size: 13px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     border-radius: 6px;
     cursor: pointer;
     border: 2px solid;
+    transition: all 0.2s;
   }
   .ctrl-btn.start {
     background: linear-gradient(135deg, #52b788 0%, #40916c 100%);
@@ -56,15 +62,16 @@
     border-color: #4a9eff;
     color: #6eb5ff;
   }
+  .ctrl-btn:hover { transform: translateY(-2px); }
   .status-bar {
     text-align: center;
-    padding: 15px;
+    padding: 12px;
     background: rgba(26, 35, 50, 0.6);
     border-radius: 8px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    letter-spacing: 2px;
+    font-size: 14px;
+    letter-spacing: 1px;
   }
   .status-bar.active { border-left: 4px solid #52b788; color: #52b788; }
   .status-bar.inactive { border-left: 4px solid #e63946; color: #e63946; }
@@ -72,18 +79,23 @@
   .players-list { max-width: 700px; margin: 0 auto; }
   .player-row {
     display: grid;
-    grid-template-columns: 80px 1fr 150px;
+    grid-template-columns: 60px 1fr 100px;
     align-items: center;
-    padding: 18px 25px;
+    padding: 14px 20px;
     background: rgba(26, 35, 50, 0.6);
     border: 1px solid #4a5568;
     border-radius: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    animation: slideIn 0.4s ease;
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
   }
   .player-row.first {
     background: linear-gradient(90deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.05));
     border-color: #ffd700;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
   }
   .player-row.second {
     background: linear-gradient(90deg, rgba(192, 192, 192, 0.15), rgba(192, 192, 192, 0.03));
@@ -95,32 +107,32 @@
   }
   .position {
     font-family: 'Oswald', sans-serif;
-    font-size: 36px;
+    font-size: 28px;
     font-weight: 700;
     color: #8a95a3;
   }
   .player-row.first .position { color: #ffd700; }
   .player-row.second .position { color: #c0c0c0; }
   .player-row.third .position { color: #cd7f32; }
-  .player-name { font-size: 20px; color: #c0c8d0; font-weight: 500; }
-  .player-row.first .player-name { color: #ffd700; font-size: 22px; font-weight: 600; }
+  .player-name { font-size: 16px; color: #c0c8d0; font-weight: 500; }
+  .player-row.first .player-name { color: #ffd700; font-weight: 600; }
   .player-time {
     text-align: right;
     font-family: 'Oswald', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     color: #6a7585;
   }
   .empty-state {
     text-align: center;
-    padding: 60px 20px;
+    padding: 40px 20px;
     color: #6a7585;
-    font-size: 18px;
+    font-size: 14px;
   }
   .counter {
     font-family: 'Oswald', sans-serif;
-    font-size: 24px;
+    font-size: 18px;
     color: #ffd700;
-    margin-left: 10px;
+    margin-left: 8px;
   }
 </style>
 </head>
@@ -146,113 +158,94 @@
   <div class="empty-state">Ожидание нажатий...</div>
 </div>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
 <script>
-const BIN_ID = '6a36ad5ef5f4af5e2914a4d3';
-const MASTER_KEY = '$2a$10$6R2dE.M6lkeTUg2STMamfeoNXfb8RNdGXEUVV0eEm9Drin2Nd97.2';
-const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+const firebaseConfig = {
+  apiKey: "AIzaSyBsu2Rj8HRw83SEO0zG_7Ev_-jBHJYm-Bs",
+  authDomain: "moscow-city-game1.firebaseapp.com",
+  databaseURL: "https://moscow-city-game1-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "moscow-city-game1",
+  storageBucket: "moscow-city-game1.firebasestorage.app",
+  messagingSenderId: "959754941375",
+  appId: "1:959754941375:web:b3010b388c18d4938c670a"
+};
 
-let lastPlayersCount = 0;
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
-loadData();
-setInterval(loadData, 800);
-
-async function loadData() {
-  try {
-    const response = await fetch(`${API_URL}/latest`, {
-      headers: { 'X-Master-Key': MASTER_KEY }
-    });
-    
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    
-    const data = await response.json();
-    const bin = data.record;
-    
-    if (!Array.isArray(bin.players)) bin.players = [];
-    if (typeof bin.active !== 'boolean') bin.active = true;
-    
-    const statusBar = document.getElementById('statusBar');
-    const statusText = document.getElementById('statusText');
-    const counter = document.getElementById('counter');
-    
-    if (bin.active) {
-      statusBar.className = 'status-bar active';
-      statusText.textContent = '🟢 ПРИЁМ ОТВЕТОВ ОТКРЫТ';
-    } else {
-      statusBar.className = 'status-bar inactive';
-      statusText.textContent = '🔴 ПРИЁМ ЗАКРЫТ';
-    }
-    
-    counter.textContent = `Нажали: ${bin.players.length}`;
-    renderPlayers(bin.players);
-    
-  } catch (e) {
-    const statusBar = document.getElementById('statusBar');
-    const statusText = document.getElementById('statusText');
-    if (statusBar && statusText) {
-      statusBar.className = 'status-bar inactive';
-      statusText.textContent = '⚠️ Ошибка подключения';
-    }
+// Слушаем раунд в реальном времени
+db.ref('extraRound').on('value', (snapshot) => {
+  const data = snapshot.val() || {};
+  const active = data.active === true;
+  const players = data.players || {};
+  
+  const statusBar = document.getElementById('statusBar');
+  const statusText = document.getElementById('statusText');
+  const counter = document.getElementById('counter');
+  
+  if (active) {
+    statusBar.className = 'status-bar active';
+    statusText.textContent = '🟢 ПРИЁМ ОТКРЫТ';
+  } else {
+    statusBar.className = 'status-bar inactive';
+    statusText.textContent = '🔴 ПРИЁМ ЗАКРЫТ';
   }
-}
+  
+  const playerCount = Object.keys(players).length;
+  counter.textContent = `Нажали: ${playerCount}`;
+  
+  renderPlayers(players);
+});
 
 function renderPlayers(players) {
   const list = document.getElementById('playersList');
-  if (!list) return;
+  const entries = Object.entries(players);
   
-  if (players.length === 0) {
+  if (entries.length === 0) {
     list.innerHTML = '<div class="empty-state">Ожидание нажатий...</div>';
-    lastPlayersCount = 0;
     return;
   }
   
-  const sorted = [...players].sort((a, b) => a.time - b.time);
+  // Сортируем по времени нажатия
+  const sorted = entries
+    .map(([key, p]) => ({ key, ...p }))
+    .sort((a, b) => (a.time || 0) - (b.time || 0));
   
-  if (sorted.length !== lastPlayersCount) {
-    list.innerHTML = sorted.map((p, i) => {
-      let rowClass = '';
-      if (i === 0) rowClass = 'first';
-      else if (i === 1) rowClass = 'second';
-      else if (i === 2) rowClass = 'third';
-      
-      const time = new Date(p.time);
-      const timeStr = time.toLocaleTimeString('ru-RU', { 
-        hour: '2-digit', minute: '2-digit', second: '2-digit'
-      });
-      
-      return `
-        <div class="player-row ${rowClass}">
-          <div class="position">#${i + 1}</div>
-          <div class="player-name">${i === 0 ? '🏆 ' : ''}${p.name}</div>
-          <div class="player-time">${timeStr}</div>
-        </div>
-      `;
-    }).join('');
+  list.innerHTML = sorted.map((p, i) => {
+    let rowClass = '';
+    if (i === 0) rowClass = 'first';
+    else if (i === 1) rowClass = 'second';
+    else if (i === 2) rowClass = 'third';
     
-    lastPlayersCount = sorted.length;
+    const time = p.time ? new Date(p.time) : new Date();
+    const timeStr = time.toLocaleTimeString('ru-RU', { 
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
+    
+    return `
+      <div class="player-row ${rowClass}">
+        <div class="position">#${i + 1}</div>
+        <div class="player-name">${i === 0 ? '🏆 ' : ''}${p.name}</div>
+        <div class="player-time">${timeStr}</div>
+      </div>
+    `;
+  }).join('');
+  
+  // Звуковой сигнал при новом игроке
+  if (sorted.length > lastPlayerCount) {
+    playBeep();
   }
+  lastPlayerCount = sorted.length;
 }
+
+let lastPlayerCount = 0;
 
 async function setActive(active) {
   try {
-    const response = await fetch(`${API_URL}/latest`, {
-      headers: { 'X-Master-Key': MASTER_KEY }
-    });
-    const data = await response.json();
-    const bin = data.record;
-    
-    bin.active = active;
-    if (!Array.isArray(bin.players)) bin.players = [];
-    
-    await fetch(API_URL, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': MASTER_KEY
-      },
-      body: JSON.stringify(bin)
-    });
-    
-    loadData();
+    await db.ref('extraRound/active').set(active);
   } catch (e) {
     alert('Ошибка: ' + e.message);
   }
@@ -262,23 +255,29 @@ async function resetRound() {
   if (!confirm('Сбросить все нажатия?')) return;
   
   try {
-    await fetch(API_URL, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': MASTER_KEY
-      },
-      body: JSON.stringify({
-        players: [],
-        active: true
-      })
+    await db.ref('extraRound').set({
+      active: true,
+      players: null
     });
-    
-    lastPlayersCount = 0;
-    loadData();
+    lastPlayerCount = 0;
   } catch (e) {
     alert('Ошибка: ' + e.message);
   }
+}
+
+function playBeep() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.frequency.value = 880;
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.15);
+  } catch (e) {}
 }
 </script>
 
